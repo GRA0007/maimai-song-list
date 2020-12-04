@@ -1,5 +1,6 @@
 const DATA_URL = 'https://cors-anywhere.herokuapp.com/https://maimai.sega.com/data/DXsongs.json'; //'./DXsongs.json';
 const IMG_URL = 'https://maimai.sega.com/storage/DX_jacket/';
+const IMG_URL_FALLBACK = 'https://maimai.sega.jp/storage/DX_jacket/';
 const CATS = {
 	'POPSアニメ': 'Pops & Anime',
 	'niconicoボーカロイド': 'Niconico & Vocaloid',
@@ -125,6 +126,7 @@ const render_songs = async data => {
 
 		let img = document.createElement('img');
 		img.alt = '';
+		img.title = s.title;
 		if ("IntersectionObserver" in window && observer) {
 			img.dataset.src = `${IMG_URL}${s.image_url}`;
 			img.src = "data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E .e %7B font-size: 20px; %7D %3C/style%3E%3Ctext x='40' y='55' class='e'%3E⌛%3C/text%3E%3C/svg%3E";
@@ -132,6 +134,10 @@ const render_songs = async data => {
 		} else {
 			img.src = `${IMG_URL}${s.image_url}`;
 		}
+		img.onerror = (event) => {
+			img.onerror = (event) => { img.onerror = null; img.src = "でらっくま.png" };
+			img.src = `${IMG_URL_FALLBACK}${s.image_url}`;
+		};
 		song.appendChild(img);
 
 		let meta = document.createElement('div');
