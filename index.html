@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Maimai Song List</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+		<meta name="description" content="Search all Maimai songs in an easy to read, customisable list. Use filters and adjust the view to suit.">
+		<meta name="keywords" content="maimai, deluxe, finale, sega, search, song, list, salt, derakuma, でらっくま, でらっくす">
+
+		<meta property="og:title" content="Maimai Song List">
+		<meta property="og:description" content="Search all Maimai songs in an easy to read, customisable list. Use filters and adjust the view to suit.">
+		<meta property="og:image" content="https://gra0007.github.io/maimai-song-list/example.png">
+		<meta property="og:url" content="https://gra0007.github.io/maimai-song-list/">
+		<meta name="twitter:card" content="summary_large_image">
+
+		<link rel="stylesheet" href="style.css" />
+		<link rel="icon" type="image/png" href="でらっくま.png">
+	</head>
+	<body>
+		<header>
+			<h1>Maimai Song List</h1>
+		</header>
+
+		<nav>
+			<input type="search" placeholder="🔍 Search" id="search">
+
+			<span class="label">Categories</span>
+			<div class="categories">
+				<label for="cat0" data-cat="New Music">
+					<input type="checkbox" name="category" value="New Music" id="cat0">
+					<label for="cat0">New Music</label>
+				</label>
+
+				<label for="cat1" data-cat="Pops & Anime">
+					<input type="checkbox" name="category" value="Pops & Anime" id="cat1">
+					<label for="cat1">Pops & Anime</label>
+				</label>
+
+				<label for="cat2" data-cat="Niconico & Vocaloid">
+					<input type="checkbox" name="category" value="Niconico & Vocaloid" id="cat2">
+					<label for="cat2">Niconico & Vocaloid</label>
+				</label>
+
+				<label for="cat3" data-cat="東方Project">
+					<input type="checkbox" name="category" value="東方Project" id="cat3">
+					<label for="cat3">東方Project</label>
+				</label>
+
+				<label for="cat4" data-cat="Game & Variety">
+					<input type="checkbox" name="category" value="Game & Variety" id="cat4">
+					<label for="cat4">Game & Variety</label>
+				</label>
+
+				<label for="cat5" data-cat="Maimai">
+					<input type="checkbox" name="category" value="Maimai" id="cat5">
+					<label for="cat5">Maimai</label>
+				</label>
+
+				<label for="cat6" data-cat="Ongeki & Chunithm">
+					<input type="checkbox" name="category" value="Ongeki & Chunithm" id="cat6">
+					<label for="cat6">Ongeki & Chunithm</label>
+				</label>
+			</div>
+
+			<span class="label">Levels</span>
+			<div class="levels">
+				<label for="lvl1">
+					<input type="checkbox" name="level" value="1" id="lvl1">
+					<label for="lvl1">1</label>
+				</label>
+				<label for="lvl2">
+					<input type="checkbox" name="level" value="2" id="lvl2">
+					<label for="lvl2">2</label>
+				</label>
+				<label for="lvl3">
+					<input type="checkbox" name="level" value="3" id="lvl3">
+					<label for="lvl3">3</label>
+				</label>
+				<label for="lvl4">
+					<input type="checkbox" name="level" value="4" id="lvl4">
+					<label for="lvl4">4</label>
+				</label>
+				<label for="lvl5">
+					<input type="checkbox" name="level" value="5" id="lvl5">
+					<label for="lvl5">5</label>
+				</label>
+				<label for="lvl6">
+					<input type="checkbox" name="level" value="6" id="lvl6">
+					<label for="lvl6">6</label>
+				</label>
+				<label for="lvl7">
+					<input type="checkbox" name="level" value="7" id="lvl7">
+					<label for="lvl7">7</label>
+				</label>
+				<label for="lvl7+">
+					<input type="checkbox" name="level" value="7+" id="lvl7+">
+					<label for="lvl7+">7+</label>
+				</label>
+				<label for="lvl8">
+					<input type="checkbox" name="level" value="8" id="lvl8">
+					<label for="lvl8">8</label>
+				</label>
+				<label for="lvl8+">
+					<input type="checkbox" name="level" value="8+" id="lvl8+">
+					<label for="lvl8+">8+</label>
+				</label>
+				<label for="lvl9">
+					<input type="checkbox" name="level" value="9" id="lvl9">
+					<label for="lvl9">9</label>
+				</label>
+				<label for="lvl9+">
+					<input type="checkbox" name="level" value="9+" id="lvl9+">
+					<label for="lvl9+">9+</label>
+				</label>
+				<label for="lvl10">
+					<input type="checkbox" name="level" value="10" id="lvl10">
+					<label for="lvl10">10</label>
+				</label>
+				<label for="lvl10+">
+					<input type="checkbox" name="level" value="10+" id="lvl10+">
+					<label for="lvl10+">10+</label>
+				</label>
+				<label for="lvl11">
+					<input type="checkbox" name="level" value="11" id="lvl11">
+					<label for="lvl11">11</label>
+				</label>
+				<label for="lvl11+">
+					<input type="checkbox" name="level" value="11+" id="lvl11+">
+					<label for="lvl11+">11+</label>
+				</label>
+				<label for="lvl12">
+					<input type="checkbox" name="level" value="12" id="lvl12">
+					<label for="lvl12">12</label>
+				</label>
+				<label for="lvl12+">
+					<input type="checkbox" name="level" value="12+" id="lvl12+">
+					<label for="lvl12+">12+</label>
+				</label>
+				<label for="lvl13">
+					<input type="checkbox" name="level" value="13" id="lvl13">
+					<label for="lvl13">13</label>
+				</label>
+				<label for="lvl13+">
+					<input type="checkbox" name="level" value="13+" id="lvl13+">
+					<label for="lvl13+">13+</label>
+				</label>
+				<label for="lvl14">
+					<input type="checkbox" name="level" value="14" id="lvl14">
+					<label for="lvl14">14</label>
+				</label>
+				<label for="lvl14+">
+					<input type="checkbox" name="level" value="14+" id="lvl14+">
+					<label for="lvl14+">14+</label>
+				</label>
+				<label for="lvl15">
+					<input type="checkbox" name="level" value="15" id="lvl15">
+					<label for="lvl15">15</label>
+				</label>
+			</div>
+
+			<span class="label">Options</span>
+			<div class="options">
+				<label for="compact">
+					<input type="checkbox" aria-role="switch" name="compact" id="compact">
+					<label for="compact">Compact view</label>
+				</label>
+			</div>
+		</nav>
+
+		<main>
+			<div id="loading">
+				<h2>Loading</h2>
+				<img src="でらっくま.png" alt="">
+			</div>
+		</main>
+
+		<button id="top">
+			Return to top
+			<img src="でらっくま.png" alt="">
+		</button>
+
+		<footer>
+			Made with <img src="でらっくま.png" alt="でらっくま" title="でらっくま"> by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>
+		</footer>
+
+		<script src="script.js"></script>
+	</body>
+</html>
