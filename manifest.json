@@ -1,0 +1,16 @@
+{
+  "name": "Maimai Song List",
+  "short_name": "Maimai Songs",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F0F0F0",
+  "description": "Search all Maimai songs in an easy to read, customisable list. Use filters and adjust the view to suit.",
+  "theme_color": "#3FBDC9",
+  "icons": [
+    {
+      "src": "./でらっくま.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

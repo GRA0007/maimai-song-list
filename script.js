@@ -26,6 +26,16 @@ let level_checkboxes = document.querySelectorAll('input[name="level"]');
 
 let list = [];
 
+const registerSW = async () => {
+	if ('serviceWorker' in navigator) {
+		try {
+			await navigator.serviceWorker.register('./serviceworker.js');
+		} catch (e) {
+			console.error('Failed to register service worker', e);
+		}
+	}
+};
+
 const filter_songs = async () => {
 	const query = search_field.value;
 	const categories = Array.from(category_checkboxes).reduce((all, box) => box.checked ? [...all, box.value] : all, []);
@@ -86,6 +96,7 @@ const filter_songs = async () => {
 
 const render_songs = async data => {
 	main.innerHTML = '';
+	let fragment = new DocumentFragment();
 
 	let observer;
 	if ("IntersectionObserver" in window) {
@@ -171,12 +182,14 @@ const render_songs = async data => {
 
 		song.appendChild(meta);
 
-		main.appendChild(song);
+		fragment.appendChild(song);
 		list.push({
 			el: song,
 			...s,
 		});
 	}
+
+	main.appendChild(fragment);
 };
 
 const fetch_data = async () => {
@@ -213,3 +226,5 @@ level_checkboxes.forEach(box => {
 });
 
 document.addEventListener('scroll', () => top_button.classList.toggle('show', window.scrollY > 300));
+
+window.addEventListener('load', () => registerSW());
