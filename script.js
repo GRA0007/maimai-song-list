@@ -26,6 +26,16 @@ let level_checkboxes = document.querySelectorAll('input[name="level"]');
 
 let list = [];
 
+const registerSW = async () => {
+	if ('serviceWorker' in navigator) {
+		try {
+			await navigator.serviceWorker.register('./serviceworker.js');
+		} catch (e) {
+			console.error('Failed to register service worker', e);
+		}
+	}
+};
+
 const filter_songs = async () => {
 	const query = search_field.value;
 	const categories = Array.from(category_checkboxes).reduce((all, box) => box.checked ? [...all, box.value] : all, []);
@@ -208,3 +218,5 @@ level_checkboxes.forEach(box => {
 });
 
 document.addEventListener('scroll', () => top_button.classList.toggle('show', window.scrollY > 300));
+
+window.addEventListener('load', () => registerSW());
