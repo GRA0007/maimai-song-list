@@ -49,7 +49,11 @@ const filter_songs = async () => {
 
 		// Search query
 		if (query !== '') {
-			if (s.title.toLowerCase().includes(query.toLowerCase()) || s.artist.toLowerCase().includes(query.toLowerCase())) {
+			if (
+				s.title.toLowerCase().includes(query.toLowerCase()) ||
+				s.artist.toLowerCase().includes(query.toLowerCase()) ||
+				s.title_romaji.includes(query.toLowerCase())
+			) {
 				showQuery = true;
 			}
 		} else {
@@ -195,6 +199,10 @@ const fetch_data = async () => {
 		let data = await res.json();
 		console.log('Sorting songs...');
 		data.sort((a,b) => a.sort - b.sort);
+		data = data.map(song => ({
+			...song,
+			title_romaji: wanakana.toRomaji(song.title_kana),
+		 }));
 		console.log('Data loaded');
 		render_songs(data);
 	} catch(e) {
