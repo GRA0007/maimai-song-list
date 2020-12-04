@@ -82,6 +82,7 @@ const filter_songs = async () => {
 
 const render_songs = async data => {
 	main.innerHTML = '';
+	let fragment = new DocumentFragment();
 
 	let observer;
 	if ("IntersectionObserver" in window) {
@@ -167,12 +168,14 @@ const render_songs = async data => {
 
 		song.appendChild(meta);
 
-		main.appendChild(song);
+		fragment.appendChild(song);
 		list.push({
 			el: song,
 			...s,
 		});
 	}
+
+	main.appendChild(fragment);
 };
 
 const fetch_data = async () => {
