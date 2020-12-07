@@ -144,11 +144,15 @@ nav #search:focus {
 	outline: none;
 	border: 4px solid #AAA;
 }
-nav .label {
+nav summary {
 	display: block;
-	margin: 20px 0 4px;
+	margin-top: 16px;
+	padding: 4px 0;
 	font-size: 14px;
 	font-weight: bold;
+	cursor: pointer;
+	outline: none;
+	user-select: none;
 }
 nav .categories {
 	display: grid;
@@ -283,10 +287,19 @@ main {
 	width: 100%;
 	margin: 30px auto;
 }
+main.empty:after {
+	content: 'No results 🧼';
+	text-align: center;
+	display: block;
+	padding: 20px 0;
+	opacity: .7;
+	font-weight: bold;
+}
 .compact main {
 	margin: 0 auto 30px;
 }
 
+[data-cat="Favorites"]						{ --cat-color: #F8B709; }
 [data-cat="New Music"]						{ --cat-color: #fb6099; }
 [data-cat="Pops & Anime"]					{ --cat-color: #FF972A; }
 [data-cat="Niconico & Vocaloid"]	{ --cat-color: #09C8D4; }
@@ -313,14 +326,17 @@ main {
 .song:before {
 	content: attr(data-cat);
 	position: absolute;
-	top: -5px;
-	right: 15px;
-	transform: translateY(-50%);
+	top: -25px;
+	right: 65px;
+	height: 40px;
 	background-color: var(--cat-color);
-	padding: 10px 14px;
+	padding: 0 14px;
 	font-weight: bold;
 	color: #FFF;
 	border-radius: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .song[data-locked]:after {
 	content: '';
@@ -337,6 +353,29 @@ main {
 	border-radius: 100px;
 	border: 2px solid #FFF;
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,.5);
+}
+
+.song .fav_button {
+	position: absolute;
+	top: -25px;
+	right: 15px;
+	height: 40px;
+	width: 40px;
+	border-radius: 100px;
+	border: 0;
+	background-color: var(--cat-color);
+	cursor: pointer;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF' d='M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z' /%3E%3C/svg%3E");
+	background-position: center;
+	background-size: 24px;
+	background-repeat: no-repeat;
+	transition: box-shadow .2s, background-color .2s, background-image .2s;
+	outline: 0;
+}
+.song .fav_button.checked {
+	background-color: var(--background-color);
+	box-shadow: inset 0 0 0 3px var(--cat-color);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F8B709' d='M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z' /%3E%3C/svg%3E");
 }
 
 .song img {
@@ -451,7 +490,7 @@ main {
 	border-left: 10px solid var(--cat-color);
 	border-radius: 0;
 	box-shadow: inset 0 -1px 0 0 var(--divider-color);
-	padding: 5px 10px 6px;
+	padding: 5px 50px 6px 10px;
 	margin-bottom: 0;
 }
 .compact .song:before {
@@ -464,6 +503,13 @@ main {
 	top: 4px;
 	left: 10px;
 	border: 1.5px solid #FFF;
+}
+.compact .song .fav_button {
+	top: 0;
+	right: 0;
+	bottom: 1px;
+	height: calc(100% - 1px);
+	border-radius: 0;
 }
 .compact .song img {
 	width: 60px;
