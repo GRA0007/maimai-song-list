@@ -135,7 +135,7 @@ const render_songs = async data => {
 			img.src = `${IMG_URL}${s.image_url}`;
 		}
 		img.onerror = (event) => {
-			img.onerror = (event) => { img.onerror = null; img.src = "でらっくま.png" };
+			img.onerror = (event) => { img.onerror = null; img.src = "でらっくま.png"; img.classList.add('placeholder') };
 			img.src = `${IMG_URL_FALLBACK}${s.image_url}`;
 		};
 		song.appendChild(img);

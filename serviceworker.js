@@ -7,12 +7,6 @@ const staticAssets = [
 	'./でらっくま.png',
 ];
 
-const cacheFirst = async req => {
-	const cache = await caches.open(cacheName);
-  const cachedResponse = await cache.match(req);
-  return cachedResponse || networkFirst(req);
-};
-
 const networkFirst = async req => {
   const cache = await caches.open(cacheName);
   try {
@@ -32,10 +26,5 @@ self.addEventListener('install', async event => {
 
 self.addEventListener('fetch', async event => {
 	const req = event.request;
-
-  if (/.*(json)$/.test(req.url)) {
-    event.respondWith(networkFirst(req));
-  } else {
-    event.respondWith(cacheFirst(req));
-  }
+  event.respondWith(networkFirst(req));
 });
