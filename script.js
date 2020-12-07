@@ -1,4 +1,4 @@
-const DATA_URL = 'https://cors-anywhere.herokuapp.com/https://maimai.sega.com/data/DXsongs.json'; //'./DXsongs.json';
+const DATA_URL = 'https://cors-anywhere.herokuapp.com/https://maimai.sega.com/data/DXsongs.json';
 const IMG_URL = 'https://maimai.sega.com/storage/DX_jacket/';
 const IMG_URL_FALLBACK = 'https://maimai.sega.jp/storage/DX_jacket/';
 const CATS = {
@@ -26,6 +26,7 @@ let category_checkboxes = document.querySelectorAll('input[name="category"]');
 let level_checkboxes = document.querySelectorAll('input[name="level"]');
 
 let list = [];
+let favs = [];
 
 const registerSW = async () => {
 	if ('serviceWorker' in navigator) {
@@ -63,7 +64,33 @@ const filter_songs = async () => {
 
 		// Categories
 		if (categories.length !== 0) {
-			if (categories.includes(CATS[s.catcode]) || (categories.includes('New Music') && s.hasOwnProperty('date') && s.date === 'NEW')) {
+			if (categories.includes(CATS[s.catcode])) {
+				showCategory = true;
+				if (categories.includes('New Music') && !s.hasOwnProperty('date')) {
+					showCategory = false;
+				}
+				if (categories.includes('Favorites') && !favs.includes(s.title)) {
+					showCategory = false;
+				}
+			} else if (
+				categories.includes('New Music') &&
+				categories.length == 1 &&
+				s.hasOwnProperty('date')
+			) {
+				showCategory = true;
+			} else if (
+				categories.includes('New Music') &&
+				categories.includes('Favorites') &&
+				categories.length == 2 &&
+				s.hasOwnProperty('date') &&
+				favs.includes(s.title)
+			) {
+				showCategory = true;
+			} else if (
+				categories.includes('Favorites') &&
+				categories.length == 1 &&
+				favs.includes(s.title)
+			) {
 				showCategory = true;
 			}
 		} else {
@@ -123,6 +150,28 @@ const render_songs = async data => {
 		if (s.hasOwnProperty('key')) {
 			song.dataset.locked = true;
 		}
+
+		let fav_button = document.createElement('button');
+		fav_button.type = 'button';
+		fav_button.title = 'Favorite song';
+		fav_button.className = `fav_button ${favs.includes(s.title) ? 'checked' : ''}`;
+		fav_button.addEventListener('click', () => {
+			if (favs.includes(s.title)) {
+				let index = favs.indexOf(s.title);
+				if (index > -1) {
+					favs.splice(index, 1);
+				}
+			} else {
+				favs.push(s.title);
+			}
+			fav_button.classList.toggle('checked', favs.includes(s.title));
+			try {
+				window.localStorage.setItem('favs', JSON.stringify(favs));
+			} catch (e) {
+				console.error(e);
+			}
+		});
+		song.appendChild(fav_button);
 
 		let img = document.createElement('img');
 		img.alt = '';
@@ -203,12 +252,17 @@ const fetch_data = async () => {
 		console.log('Loading...');
 		let res = await fetch(DATA_URL);
 		let data = await res.json();
+		try {
+			favs = JSON.parse(window.localStorage.getItem('favs')) || [];
+		} catch (e) {
+			console.error(e);
+		}
 		console.log('Sorting songs...');
 		data.sort((a,b) => a.sort - b.sort);
 		data = data.map(song => ({
 			...song,
 			title_romaji: wanakana.toRomaji(song.title_kana),
-		 }));
+		}));
 		console.log('Data loaded');
 		render_songs(data);
 	} catch(e) {
