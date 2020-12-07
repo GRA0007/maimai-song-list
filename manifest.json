@@ -1,6 +1,6 @@
 {
   "name": "Maimai Song List",
-  "short_name": "Maimai Songs",
+  "short_name": "Maimai",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#F0F0F0",
