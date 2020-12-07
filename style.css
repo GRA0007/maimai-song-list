@@ -287,6 +287,14 @@ main {
 	width: 100%;
 	margin: 30px auto;
 }
+main.empty:after {
+	content: 'No results 🧼';
+	text-align: center;
+	display: block;
+	padding: 20px 0;
+	opacity: .7;
+	font-weight: bold;
+}
 .compact main {
 	margin: 0 auto 30px;
 }

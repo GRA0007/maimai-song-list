@@ -43,6 +43,7 @@ const filter_songs = async () => {
 	const categories = Array.from(category_checkboxes).reduce((all, box) => box.checked ? [...all, box.value] : all, []);
 	const levels = Array.from(level_checkboxes).reduce((all, box) => box.checked ? [...all, box.value] : all, []);
 
+	let results = 0;
 	for (let i = 0; i < list.length; i++) {
 		const s = list[i];
 		let showQuery = false;
@@ -119,7 +120,11 @@ const filter_songs = async () => {
 
 		let show = showQuery && showCategory && showLevel;
 		s.el.classList.toggle('hidden', !show);
+		results += show ? 1 : 0;
 	}
+
+	console.log(`Found ${results} results`);
+	main.classList.toggle('empty', results === 0);
 };
 
 const render_songs = async data => {
