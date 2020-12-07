@@ -249,14 +249,14 @@ const render_songs = async data => {
 
 const fetch_data = async () => {
 	try {
+		favs = JSON.parse(window.localStorage.getItem('favs')) || [];
+		let wasCompact = JSON.parse(window.localStorage.getItem('compact')) || false;
+		document.body.classList.toggle('compact', wasCompact);
+		compact_toggle.checked = wasCompact;
+
 		console.log('Loading...');
 		let res = await fetch(DATA_URL);
 		let data = await res.json();
-		try {
-			favs = JSON.parse(window.localStorage.getItem('favs')) || [];
-		} catch (e) {
-			console.error(e);
-		}
 		console.log('Sorting songs...');
 		data.sort((a,b) => a.sort - b.sort);
 		data = data.map(song => ({
@@ -265,14 +265,21 @@ const fetch_data = async () => {
 		}));
 		console.log('Data loaded');
 		render_songs(data);
-	} catch(e) {
+	} catch (e) {
 		console.error(e);
 	}
 };
 
 fetch_data();
 
-compact_toggle.addEventListener('change', async () => document.body.classList.toggle('compact', compact_toggle.checked));
+compact_toggle.addEventListener('change', async () => {
+	document.body.classList.toggle('compact', compact_toggle.checked);
+	try {
+		window.localStorage.setItem('compact', JSON.stringify(compact_toggle.checked));
+	} catch (e) {
+		console.error(e);
+	}
+});
 
 top_button.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
