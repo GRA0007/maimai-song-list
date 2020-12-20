@@ -441,7 +441,7 @@ main.empty:after {
 	text-shadow: 0 0 3px #666;
 }
 .song .levels div.fn:before {
-	content: 'FiNALE';
+	content: 'Standard';
 	background: #45AEFF;
 }
 .song .levels div.dx:before {
