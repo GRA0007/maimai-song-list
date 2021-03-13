@@ -1,4 +1,4 @@
-const DATA_URL = 'https://cors-anywhere.herokuapp.com/https://maimai.sega.com/data/DXsongs.json';
+const DATA_URL = 'https://gf.hikaru.tech:3000/https://maimai.sega.com/data/DXsongs.json';
 const IMG_URL = 'https://maimai.sega.com/storage/DX_jacket/';
 const IMG_URL_FALLBACK = 'https://maimai.sega.jp/storage/DX_jacket/';
 const CATS = {
